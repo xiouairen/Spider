@@ -1,14 +1,24 @@
 ﻿#coding=utf-8
+"""练手"""
+import io
+import sys
 import urllib.request
+import codecs
 
-def getHtml(url):
+def get_html(url):
+    """function to get html of url"""
     page = urllib.request.urlopen(url)
-    html = page.read()
-    return html
+    _html = page.read()
+    return _html
 
-html = getHtml("http://www.sina.com.cn")
+print(sys.stdout.encoding)
 
-print(html)
-print(type(html))
-html_utf8 = html.decode("UTF-8")
-print(html_utf8)
+TEST = "测试"
+print(TEST)
+
+HTML = get_html("http://baike.baidu.com/subview/1234/8387432.htm")
+HTML_UTF8 = HTML.decode("utf8")
+
+f = codecs.open('out.txt','a','utf-8')
+f.write(HTML.decode("utf8"))
+
