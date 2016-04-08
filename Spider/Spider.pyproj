@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>15eba7a1-a0c6-4299-bd3f-b655582a2a89</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Spider.py</StartupFile>
+    <StartupFile>schedule.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,25 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="LoadArticle.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ParseHtml1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="schedule.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Spider.py" />
+    <Compile Include="test\testConfigFile.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="test\testCodec.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="test\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

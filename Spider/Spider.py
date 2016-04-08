@@ -1,24 +1,24 @@
 ﻿#coding=utf-8
-"""练手"""
 import io
 import sys
-import urllib.request
-import codecs
+import configparser
+import LoadArticle
 
-def get_html(url):
-    """function to get html of url"""
-    page = urllib.request.urlopen(url)
-    _html = page.read()
-    return _html
-
-print(sys.stdout.encoding)
-
-TEST = "测试"
-print(TEST)
-
-HTML = get_html("http://baike.baidu.com/subview/1234/8387432.htm")
-HTML_UTF8 = HTML.decode("utf8")
-
-f = codecs.open('out.txt','a','utf-8')
-f.write(HTML.decode("utf8"))
-
+def downloadBooks():
+    configFilePath = "conf.ini"
+    config = configparser.ConfigParser()
+    config.read(configFilePath)
+    books = config.sections()
+    try:
+        for book in books:
+            urls = config.items(book)
+            bookUrl = urls[0][1]
+            if len(urls) == 2:
+                bookUrl = urls[1][1]
+            #读取后续章节并返回最后一章的URL
+            la = LoadArticle.LoadArticle()
+            la.LoadBook("E:\\快盘\\闲书\\", book, bookUrl)
+    except:
+        info=sys.exc_info()  
+        print(info[0],":",info[1])
+    return
