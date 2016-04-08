@@ -5,7 +5,7 @@ import urllib.request
 import urllib.parse
 from html.parser import HTMLParser
 
-class URLParser(HTMLParser): 
+class ChapterParser(HTMLParser): 
     def __init__(self): 
         self.taglevels = [] 
         self.handledtags = ["a", "h1", "div"]

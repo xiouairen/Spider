@@ -27,9 +27,15 @@ class LoadArticle:
         self.config.read(self.configFilePath)
         return
 
-    def LoadOneChapter(self, folder, url):
-        tp = ParseHtml1.URLParser()
-        output = tp.parseHtml(url)
+    def LoadOneChapter(self, folder, siteName, url):
+        hp = None
+        if siteName == "20xs":
+            hp = ParseHtml1.ChapterParser()
+
+        if hp == None:
+            return
+
+        output = hp.parseHtml(url)
         nextUrl = output[0]
         title = output[1]
         content = output[2]
@@ -51,16 +57,17 @@ class LoadArticle:
         self.config.write(open(self.configFilePath, "w"))
         return nextUrl
 
-    def LoadBook(self, folder, bookName, firstUrl):
-        self.InitConfig(folder+bookName)
+    def LoadBook(self, folder, siteName, bookName, firstUrl):
+        bookFolder = folder+bookName+"\\"+siteName
+        self.InitConfig(bookFolder)
         chapterCounter = self.config.get(self.configSection, self.configOptionCounter)
         if int(chapterCounter) == 0:
             url = firstUrl
         else:
             url = self.config.get(self.configSection, chapterCounter)
         
-        nextUrl = self.LoadOneChapter(folder+bookName, url)
+        nextUrl = self.LoadOneChapter(bookFolder, siteName, url)
         while url != nextUrl:
             url = nextUrl
-            nextUrl = self.LoadOneChapter(folder+bookName, url)
+            nextUrl = self.LoadOneChapter(bookFolder, siteName, url)
         return
